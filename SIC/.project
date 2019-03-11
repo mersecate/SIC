@@ -5,7 +5,6 @@
 	<projects>
 		<project>SICDTO</project>
 		<project>SICEJB</project>
-		<project>SICWeb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
