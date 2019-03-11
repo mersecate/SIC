@@ -8,7 +8,7 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="KOEMMWeb.war" deploy-path="/" handle="module:/resource/KOEMMWeb/KOEMMWeb">
+        <dependent-module archiveName="SICWeb.war" deploy-path="/" handle="module:/resource/SICWeb/SICWeb">
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
