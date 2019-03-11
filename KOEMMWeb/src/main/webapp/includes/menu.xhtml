@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<ul class="sidebar-menu tree" data-widget="tree">
+		<li><p:link outcome="/index" onclick="clearBreadCrumbs()">
+				<i class="fa fa-home"></i>
+				<span>Inicio</span>
+			</p:link></li>
+		<li class="header">Aplicaciones</li>
+	</ul>
+	<ul class="sidebar-menu tree" data-widget="tree">
+		<p:repeat value="#{menu.itemBOs}" var="itemNivel1">
+			<li class="treeview">
+				<a href="#">
+					<i class="fa fa-car"></i>
+					<span>#{itemNivel1.titulo}</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu">
+					<p:repeat value="#{itemNivel1.itemBOs}" var="itemNivel2">
+						<li style="display: #{itemNivel2.tieneHijos == 0 ? 'block' : 'none' }">
+							<p:link outcome="#{itemNivel2.url}">
+								<i class="fa fa-car"></i>
+								<span>#{itemNivel2.titulo}</span>
+							</p:link>
+						</li>
+						<li class="treeview" style="display: #{itemNivel2.tieneHijos == 1 ? 'block' : 'none' }">
+							<a href="#">
+								<i class="fa fa-laptop"></i>
+								<span>#{itemNivel2.titulo}</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu">
+								<p:repeat value="#{itemNivel2.itemBOs}" var="itemNivel3">
+									<li>
+										<p:link outcome="#{itemNivel3.url}">
+											<i class="fa fa-car"></i>
+											<span>#{itemNivel3.titulo}</span>
+										</p:link>
+									</li>
+								</p:repeat>
+							</ul>
+						</li>
+					</p:repeat>
+				</ul>
+			</li>
+		</p:repeat>
+	</ul>
+</ui:composition>

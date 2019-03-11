@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:adm="http://github.com/adminfaces"
+	template="#{layoutMB.template}">
+
+	<ui:define name="title">
+        Test
+    </ui:define>
+
+	<ui:define name="body">
+		<f:metadata>
+			<f:viewParam name="id" value="#{test.id}"
+				converter="javax.faces.Long" />
+			<!-- use view action if you are in a Java EE 7 server: <f:viewAction action="#{carFormMB.init()}"/>-->
+			<f:event type="preRenderView" listener="#{test.init}" />
+		</f:metadata>
+
+		<adm:breadcrumb
+			title="#{test.id == 0 ? 'Nueva test' : 'Test '.concat(test.id)}"
+			link="/pages/form/test.jsf?id=#{test.id}" />
+		<h:form id="form" prependId="false">
+			<p:focus context="@form" />
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<div id="main-buttons" class="hidden-sm hidden-xs">
+						<p:commandButton value="Guardar" action="#{test.guardar}"
+							update="@form" icon="fa fa-check" styleClass="btn-primary" />
+						<p:spacer width="5" />
+						<p:commandButton value="Regresar" immediate="true"
+							action="/pages/testLista?faces-redirect=true" process="@this"
+							icon="fa fa-reply" />
+					</div>
+					
+					 <p:splitButton value="Guardar" action="#{test.guardar}" update="@form"
+                                   icon="fa fa-check"
+                                   styleClass="hidden-md hidden-lg btn-primary">
+                        <p:separator/>
+                        <p:menuitem value="Regresar" action="/pages/testLista?faces-redirect=true"
+                                    process="@this" immediate="true"
+                                    icon="fa fa-reply"/>
+                    </p:splitButton>
+                    
+
+					<p:separator />
+
+					<div class="ui-g">
+						<div class="ui-g-4">
+							<p:outputLabel for="id" value="Id" />
+						</div>
+						<div class="ui-g-8">
+							<p:inputText id="id" value="#{test.testBO.idTest}"
+								size="4" readonly="true" styleClass="form-control"
+								style="width: 100%" />
+						</div>
+						<div class="ui-g-4">
+							<p:outputLabel for="descripcion" value="Descripcion" />
+						</div>
+						<div class="ui-g-8">
+							<p:inputText id="descripcion"
+								value="#{test.testBO.descripcion}" size="4"
+								readonly="false" styleClass="form-control" style="width: 100%" />
+						</div>
+						<div class="ui-g-4">
+							<p:outputLabel for="codigo" value="Codigo" />
+						</div>
+						<div class="ui-g-8">
+							<p:inputText id="codigo" value="#{test.testBO.codigo}"
+								size="4" readonly="false" styleClass="form-control"
+								style="width: 100%" />
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+				styleClass="box-danger box-solid">
+				<p:commandButton value="Si" type="button"
+					styleClass="btn-material btn-primary ui-confirmdialog-yes"
+					icon="fa fa-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="btn-material btn-danger ui-confirmdialog-no"
+					icon="fa fa-close" />
+			</p:confirmDialog>
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

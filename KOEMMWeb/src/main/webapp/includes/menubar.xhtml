@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ul class="nav navbar-nav">
+		<li><p:link outcome="/index" onclick="clearBreadCrumbs()">
+				<i class="fa fa-home"></i>
+				<span>Inicio</span>
+			</p:link></li>
+
+		<p:repeat value="#{menu.itemBOs}" var="itemNivel1">
+			<li class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown"> #{itemNivel1.titulo}
+					<span class="caret"></span>
+					<i class="fa fa-car"></i>
+				</a>
+				<ul class="dropdown-menu" role="menu">
+					<p:repeat value="#{itemNivel1.itemBOs}" var="itemNivel2">
+						<li style="display: #{itemNivel2.tieneHijos == 0 ? 'block' : 'none' }">
+							<p:link outcome="#{itemNivel2.url}">
+								<span>#{itemNivel2.titulo}</span>
+							</p:link>
+						</li>
+						
+						<li class="dropdown-submenu" style="display: #{itemNivel2.tieneHijos == 1 ? 'block' : 'none' }">
+							<a href="#">
+								<span>#{itemNivel2.titulo}</span>
+							</a>
+							<ul class="dropdown-menu">
+								<p:repeat value="#{itemNivel2.itemBOs}" var="itemNivel3">
+									<li>
+										<p:link outcome="#{itemNivel3.url}">
+											<span>#{itemNivel3.titulo}</span>
+										</p:link>
+									</li>
+								</p:repeat>
+							</ul>
+						</li>
+					</p:repeat>
+				</ul>
+			</li>
+		</p:repeat>
+	</ul>
+
+</ui:composition>
