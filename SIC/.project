@@ -3,8 +3,9 @@
 	<name>SIC</name>
 	<comment></comment>
 	<projects>
-		<project>SICDTO</project>
 		<project>SICEJB</project>
+		<project>SICDTO</project>
+		<project>SICWeb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
